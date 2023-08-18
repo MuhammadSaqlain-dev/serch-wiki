@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Autocomplete from "react-autocomplete";
 import { useDebounce, useSearch } from "./Hooks/useSearch";
 
+import Input from "./components/Input";
+
 function App() {
   const [value, setValue] = useState("");
 
@@ -11,6 +13,14 @@ function App() {
     <div className="App">
       <Autocomplete
         getItemValue={(item) => item.label}
+        renderInput={Input}
+        inputProps={{ placeholder: "Search Wikipedia: " }}
+        renderMenu={(items, val, style) => (
+          <div style={{ ...style }} className="input-suggessions">
+            {items}
+            <a href={`/search?query=${val}`}>See all results</a>
+          </div>
+        )}
         items={list}
         renderItem={(item, isHighlighted) => (
           <div
