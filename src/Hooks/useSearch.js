@@ -39,3 +39,18 @@ export const useSearch = (query) => {
 
   return state;
 };
+
+// this custom hook use state and return the last typed value after 0.5sec.
+export const useDebounce = (val) => {
+  const [debouncedValue, setDebouncedValue] = useState(val);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(val);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [val]);
+
+  return debouncedValue;
+};
