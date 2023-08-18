@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Autocomplete from "react-autocomplete";
-import { useDebounce, useSearch } from "./Hooks/useSearch";
+import { useDebounce, useSearch, useSearchForm } from "./Hooks/hooks";
 
 import Input from "./components/Input";
 
 function App() {
-  const [value, setValue] = useState("");
-
+  const { onValueChange, value } = useSearchForm();
   const list = useSearch(useDebounce(value));
 
   return (
@@ -15,12 +14,16 @@ function App() {
         getItemValue={(item) => item.label}
         renderInput={Input}
         inputProps={{ placeholder: "Search Wikipedia: " }}
-        renderMenu={(items, val, style) => (
-          <div style={{ ...style }} className="input-suggessions">
-            {items}
-            <a href={`/search?query=${val}`}>See all results</a>
-          </div>
-        )}
+        renderMenu={(items, val, style) =>
+          list && list.length ? (
+            <div style={{ ...style }} className="input-suggessions">
+              {items}
+              <a href={`/search?query=${val}`}>See all results</a>
+            </div>
+          ) : (
+            <></>
+          )
+        }
         items={list}
         renderItem={(item, isHighlighted) => (
           <div
@@ -31,8 +34,8 @@ function App() {
           </div>
         )}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onSelect={(val) => setValue(val)}
+        onChange={(e) => onValueChange(e.target.value)}
+        onSelect={(val) => onValueChange(val)}
       />
     </div>
   );

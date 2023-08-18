@@ -54,3 +54,14 @@ export const useDebounce = (val) => {
 
   return debouncedValue;
 };
+
+export const useSearchForm = () => {
+  const [value, setValue] = useState("");
+
+  const onValueChange = (e) => setValue(e);
+
+  return {
+    value,
+    onValueChange,
+  };
+};
