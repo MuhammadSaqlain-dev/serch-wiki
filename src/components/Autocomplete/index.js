@@ -3,6 +3,8 @@ import Autocomplete from "react-autocomplete";
 
 import Input from "../Input";
 
+import "./styles.scss";
+
 const AutoComplete = ({ list, onValueChange, value }) => {
   return (
     <div className="App">
@@ -14,7 +16,9 @@ const AutoComplete = ({ list, onValueChange, value }) => {
           list && list.length ? (
             <div style={{ ...style }} className="input-suggessions">
               {items}
-              <a href={`/search?query=${val}`}>See all results</a>
+              <a className="search-link" href={`/search?query=${val}`}>
+                See all results
+              </a>
             </div>
           ) : (
             <></>
