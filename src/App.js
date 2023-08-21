@@ -15,12 +15,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-
-    // <Container>
-    //   {({ list, onValueChange, value }) => (
-    //     <AutoComplete list={list} onValueChange={onValueChange} value={value} />
-    //   )}
-    // </Container>
   );
 }
 

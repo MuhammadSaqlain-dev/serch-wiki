@@ -25,12 +25,15 @@ const AutoComplete = ({ list, onValueChange, value }) => {
           )
         }
         items={list}
-        renderItem={(item, isHighlighted) => (
+        renderItem={(item, highlighted) => (
           <div
-            style={{ background: isHighlighted ? "lightgray" : "white" }}
-            key={item.label}
+            className="input-suggestions-item"
+            key={item.id}
+            style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}
           >
-            {item.label}
+            <a href={item.id} target="_blank">
+              {item.label}
+            </a>
           </div>
         )}
         value={value}
