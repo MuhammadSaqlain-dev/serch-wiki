@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export const useSearch = (query = "", limit = 10) => {
-  const [state, setState] = useState([]);
+  const [state, setState] = useState({ articles: [], status: "" });
 
   const ApiURL = `https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${query}&limit=${limit}`;
 
@@ -30,10 +30,11 @@ export const useSearch = (query = "", limit = 10) => {
           for (let i = 0; i < res.data[1].length; i++) {
             parsedData.push({ id: i, label: res.data[1][i] });
           }
-          setState(parsedData);
+          setState({ articles: parsedData, status: "SUCCESS" });
         });
     } catch (error) {
       console.log(error);
+      setState({ articles: [], status: "ERROR" });
     }
   }, [query]);
 

@@ -1,9 +1,7 @@
 import React from "react";
 
 const ListItem = () => {
-  return (
-    
-  )
+  return <div>ListItem</div>;
 };
 
 export default ListItem;
