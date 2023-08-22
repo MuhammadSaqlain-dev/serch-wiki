@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
-export const useSearch = (query) => {
+export const useSearch = (query = "", limit = 10) => {
   const [state, setState] = useState([]);
 
-  const ApiURL = `https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${query}`;
+  const ApiURL = `https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${query}&limit=${limit}`;
 
   const cancelToken = useRef(null);
 
